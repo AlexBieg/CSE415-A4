@@ -86,17 +86,17 @@ Team:
 
 # Change the following to represent your own information:
 
-maggie = Partner("Alex", "Bieg", "biega")
-john = Partner("Cole", "Chamberlin", "jessec18")
-team = [maggie, john]
+alex = Partner("Alex", "Bieg", "biega")
+cole = Partner("Cole", "Chamberlin", "jessec18")
+team = [alex, cole]
 
 #TODO: Update this
-problem1 = Problem("Solving Zika Virus Spreading <CHANGE TO OUR SPECIFIC>", 'wicked', "Stop_Zika")
+problem1 = Problem("Solving Zika Virus Spreading <CHANGE TO OUR SPECIFIC PROBLEM>", 'wicked', "Stop_Zika")
  # In this case, the Python file for the formulation would be named End_Poverty.py.
 
 problems = [problem1]
 
-our_submission = Who_and_what([maggie, john], OPTION_A, problems)
+our_submission = Who_and_what([alex, cole], OPTION_A, problems)
 # Legal options are OPTION_A, OPTION_B, OPTION_C3, or OPTION_C2PLUS
 
 # You can run this file from the command line by typing:
