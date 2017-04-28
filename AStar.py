@@ -27,7 +27,7 @@ if sys.argv==[''] or len(sys.argv)<2:
 else:
     import importlib
     Problem = importlib.import_module(sys.argv[1])
-    heuristics = lambda s: Problem.HEURISTICS[sys.argv[2]](s)
+    heuristics = lambda s: Problem.HEURISTICS[0](s)
 
 # import initial state from file
 try:
@@ -83,12 +83,10 @@ def AStar(initial_state):
                 print(op.name)
                 new_state = op.state_transf(S)
                 if new_state not in CLOSED:
-                    print("new state not in closed")
-                    if new_state not in OPEN_D or \
-                            OPEN_D[new_state] > new_state.cost:
-                        print("new state not in open")
+                    if new_state not in OPEN_D: #or \
+                            #OPEN_D[new_state] > new_state.cost:
                         OPEN.put(new_state)
-                        OPEN_D[new_state] = new_state.cost
+                        OPEN_D[new_state] = 0 #new_state.cost
                         BACKLINKS[new_state] = S
                         print(new_state)
 

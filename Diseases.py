@@ -56,10 +56,10 @@ cities = []
 
 #<STATE>
 class State():
-    def __init__(self, cities):
+    def __init__(self, cities, date=0):
         self.cities = {}
-        for city in cities:
-            self.cities[city.name] = city
+        self.cities = cities
+        self.date = date
 
     def __repr__(self):
         return self.__str__()
@@ -81,10 +81,13 @@ class State():
 
     def __eq__(self, other):
         if isinstance(other, State):
-            if len(self.cities) != len(other.cities): return False
+            if len(self.cities) != len(other.cities):
+                return False
             for name, city in self.cities.items():
-                if not other.cities[name].__eq__(city): return False
+                if not other.cities[name].__eq__(city):
+                    return False
             return True
+
 
     def __lt__(self, other):
         if isinstance(other, State):
@@ -93,16 +96,17 @@ class State():
     def __hash__(self):
         h = ""
         for n, c in self.cities.items():
-            h += c.__str__()
+            h += str(c.__hash__())
+
         return h.__hash__()
 
     def __copy__(self):
         # Performs an appropriately deep copy of a state,
         # for use by operators in creating new states.
-        newCities = []
+        newCities = {}
         for name, city in self.cities.items():
-            newCities.append(city.__copy__())
-        newS = State(newCities)
+            newCities[name] = city.__copy__()
+        newS = State(newCities, self.date+1)
         return newS
 
     def getCity(self, city):
@@ -110,7 +114,7 @@ class State():
 
     def getScore(self):
         score = 0
-        for c in self.cities:
+        for n, c in self.cities.items():
             score += c.score()
         return score
 
@@ -139,11 +143,18 @@ class City():
         self.gamma = gamma
 
     def __eq__(self, other):
+        is_same = False
         if isinstance(other, City):
-            return self.name == other.name
+            rec = self.recov == other.recov
+            sus = self.susc == other.susc
+            inf = self.inf == other.inf
+            name = self.name = other.name
+
+            is_same = (rec and sus and inf and name)
+        return is_same
 
     def __hash__(self):
-        (self.name + str(self.lat) + str(self.lng)).__hash__()
+        (self.name + str(self.lat) + str(self.lng) + str(self.susc) + str(self.recov) + str(self.inf)).__hash__()
 
     def __str__(self):
         return str(self.name) + " infected: " + str(self.inf) + " recovered: " + str(self.recov)
@@ -180,7 +191,7 @@ class City():
 
 #<INITIAL_STATE>
 def CREATE_INITIAL_STATE():
-    cities = []
+    cities = {}
     with open("cities.tsv", 'r') as city_data:
         for i, line in enumerate(city_data):
             if i != 0:
@@ -194,8 +205,9 @@ def CREATE_INITIAL_STATE():
                 gdp = int(c[11])
                 airpts = int(c[12])
                 size = int(c[13])
-                cities.append(City(name, lat, lng, pop, medAge, lifeExp, gdp,
-                    airpts, size))
+                city = City(name, lat, lng, pop, medAge, lifeExp, gdp, airpts,
+                        size)
+                cities[city.name] = city
     return State(cities)
 INITIAL_STATE = CREATE_INITIAL_STATE()
 #</INITIAL_STATE>
@@ -210,10 +222,10 @@ def updateCity(s, city, aid):
                 air = c1.airpts * c2.airpts
                 c1.gamma = c1.pop * air / dist
                 c2.gamma = c2.pop * air / dist
-        if n == city:
-            c.giveAid(1)
+        if n1 == city:
+            c1.giveAid(1)
         else:
-            c.giveAid(0)
+            c1.giveAid(0)
         print(str(n1) + str(c1.gamma))
     return newS
 
