@@ -83,11 +83,14 @@ def AStar(initial_state):
                 print(op.name)
                 new_state = op.state_transf(S)
                 if new_state not in CLOSED:
+                    print("new state not in closed")
                     if new_state not in OPEN_D or \
                             OPEN_D[new_state] > new_state.cost:
+                        print("new state not in open")
                         OPEN.put(new_state)
                         OPEN_D[new_state] = new_state.cost
                         BACKLINKS[new_state] = S
+                        print(new_state)
 
 # DO NOT CHANGE
 def backtrace(S):

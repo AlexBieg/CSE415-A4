@@ -75,8 +75,8 @@ class State():
             inf = int(city.inf)
             total_population += pop
             total_infected += inf
-            txt += name + "\t" + "{:,}".format(pop * 1000) + "\t" + str(inf/pop) + "\n" 
-        txt += "\n" + "Total % Infected: " + str(total_infected/total_population)
+            txt += name + "\t" + "{:,}".format(pop * 1000) + "\t" + str(int(100*inf/pop)) + "\n" 
+        txt += "\n" + "Total % Infected: " + str(int(100*total_infected/total_population))
         return txt
 
     def __eq__(self, other):
@@ -93,7 +93,7 @@ class State():
     def __hash__(self):
         h = ""
         for n, c in self.cities.items():
-            h += str(c.inf)
+            h += c.__str__()
         return h.__hash__()
 
     def __copy__(self):
@@ -142,6 +142,9 @@ class City():
     def __hash__(self):
         (self.name + str(self.lat) + str(self.lng)).__hash__()
 
+    def __str__(self):
+        return str(self.name) + " infected: " + str(self.inf) + " recovered: " + str(self.recov)
+
     def __copy__(self):
         newCity = City(self.name, self.lat, self.lng, self.pop, self.medAge,
                 self.lifeExp, self.gdp, self.airpts, self.inf, self.susc,
@@ -149,10 +152,16 @@ class City():
         return newCity
 
     def giveAid(self, amount):
-        alpha = 1
-        beta = 1
-        new_inf = math.exp(-amount*alpha) * self.susc
-        new_recov = (1 - math.exp(-amount*beta)) * self.inf
+        amt_per_person = amount / (self.pop - self.recov)
+        #print("pop: " + str(self.pop - self.recov))
+        alpha = self.susc * amt_per_person # how much effect the aid has on stopping new infections
+        #print("alpha: " + str(alpha))
+        beta = self.inf * amt_per_person # how much effect the aid has on curing infected people
+        #print("beta: " + str(beta))
+        delta = (1 - math.exp(-self.airpts/5)) # how quickly infection spreads with no aid
+        gamma = (1 - math.exp(-self.gdp/10000)) # how quickly people recover with no aid
+        new_inf = int(delta*math.exp(-amount*alpha)*self.susc)
+        new_recov = int(gamma*(1 - math.exp(-amount*beta))*self.inf)
         self.susc -= new_inf
         self.inf += new_inf
         self.inf -= new_recov
@@ -173,13 +182,13 @@ def CREATE_INITIAL_STATE():
             if i != 0:
                 c = line.split('\t')
                 name = c[0]
-                lat = c[2]
-                lng = c[3]
-                pop = c[5]
-                medAge = c[6]
-                lifeExp = c[7]
-                gdp = c[10]
-                airpts = c[11]
+                lat = float(c[2])
+                lng = float(c[3])
+                pop = int(c[5])
+                medAge = float(c[6])
+                lifeExp = float(c[7])
+                gdp = int(c[11])
+                airpts = int(c[12])
                 cities.append(City(name, lat, lng, pop, medAge, lifeExp, gdp, airpts))
     return State(cities)
 INITIAL_STATE = CREATE_INITIAL_STATE()
@@ -188,7 +197,11 @@ INITIAL_STATE = CREATE_INITIAL_STATE()
 #<OPERATORS>
 def updateCity(s, city, aid):
     newS = s.__copy__()
-    newS.getCity(city).giveAid(aid)
+    for n, c in newS.cities.items():
+        if n == city:
+            c.giveAid(1)
+        else:
+            c.giveAid(0)
     return newS
 
 OPERATORS = [Operator("Gave aid to " + name,
