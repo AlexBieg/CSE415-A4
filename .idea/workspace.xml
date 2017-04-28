@@ -24,11 +24,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Diseases.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Diseases.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Diseases.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="693">
-              <caret line="152" column="17" lean-forward="false" selection-start-line="152" selection-start-column="17" selection-end-line="152" selection-end-column="17" />
+            <state relative-caret-position="315">
+              <caret line="116" column="13" lean-forward="false" selection-start-line="116" selection-start-column="13" selection-end-line="116" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -44,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AStar.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AStar.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AStar.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="89" column="42" lean-forward="false" selection-start-line="89" selection-start-column="42" selection-end-line="89" selection-end-column="42" />
+            <state relative-caret-position="567">
+              <caret line="82" column="29" lean-forward="false" selection-start-line="82" selection-start-column="29" selection-end-line="82" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -63,8 +63,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/a4_simple_autograder.py" />
-        <option value="$PROJECT_DIR$/AStar.py" />
         <option value="$PROJECT_DIR$/Diseases.py" />
+        <option value="$PROJECT_DIR$/AStar.py" />
       </list>
     </option>
   </component>
@@ -282,18 +282,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AStar.py">
+    <entry file="file://$PROJECT_DIR$/Diseases.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="89" column="42" lean-forward="false" selection-start-line="89" selection-start-column="42" selection-end-line="89" selection-end-column="42" />
+        <state relative-caret-position="315">
+          <caret line="116" column="13" lean-forward="false" selection-start-line="116" selection-start-column="13" selection-end-line="116" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Diseases.py">
+    <entry file="file://$PROJECT_DIR$/AStar.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="693">
-          <caret line="152" column="17" lean-forward="false" selection-start-line="152" selection-start-column="17" selection-end-line="152" selection-end-column="17" />
+        <state relative-caret-position="567">
+          <caret line="82" column="29" lean-forward="false" selection-start-line="82" selection-start-column="29" selection-end-line="82" selection-end-column="29" />
           <folding />
         </state>
       </provider>

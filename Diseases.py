@@ -114,7 +114,7 @@ class State():
 
     def getScore(self):
         score = 0
-        for c in self.cities:
+        for n, c in self.cities.items():
             score += c.score()
         return score
 
