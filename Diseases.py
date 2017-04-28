@@ -118,8 +118,9 @@ class State():
 
 #<CITY>
 class City():
-    def __init__(self, name, lat, lng, pop, medAge, lifeExp, gdp, airpts, inf=0.0, susc=0.0,
-            recov=0.0, ds=0.0, di=0.0, dr=0.0):
+
+    def __init__(self, name, lat, lng, pop, medAge, lifeExp, gdp, airpts, size,
+            inf=0.0, susc=0.0, recov=0.0, alpha=0.0, beta=0.0, delta=0.0, gamma=0.0):
         self.name = name
         self.lat = lat
         self.lng = lng
@@ -128,12 +129,14 @@ class City():
         self.lifeExp = lifeExp
         self.gdp = gdp
         self.airpts = airpts
+        self.size = size
         self.susc = float(pop) * 0.7
         self.inf = float(pop) * 0.3
         self.recov = recov
-        self.ds = ds
-        self.di = di
-        self.dr = dr
+        self.alpha = alpha
+        self.beta = beta
+        self.delta = delta
+        self.gamma = gamma
 
     def __eq__(self, other):
         if isinstance(other, City):
@@ -147,19 +150,20 @@ class City():
 
     def __copy__(self):
         newCity = City(self.name, self.lat, self.lng, self.pop, self.medAge,
-                self.lifeExp, self.gdp, self.airpts, self.inf, self.susc,
-                self.recov)
+                self.lifeExp, self.gdp, self.airpts, self.size, self.inf, 
+                self.susc, self.recov)
         return newCity
 
     def giveAid(self, amount):
         amt_per_person = amount / (self.pop - self.recov)
-        #print("pop: " + str(self.pop - self.recov))
-        alpha = self.susc * amt_per_person # how much effect the aid has on stopping new infections
-        #print("alpha: " + str(alpha))
-        beta = self.inf * amt_per_person # how much effect the aid has on curing infected people
-        #print("beta: " + str(beta))
-        delta = (1 - math.exp(-self.airpts/5)) # how quickly infection spreads with no aid
-        gamma = (1 - math.exp(-self.gdp/10000)) # how quickly people recover with no aid
+        # how much effect the aid has on stopping new infections
+        alpha = self.susc * amt_per_person 
+        # how much effect the aid has on curing infected people
+        beta = self.inf * amt_per_person 
+        # how quickly infection spreads with no aid
+        delta = (1 - math.exp(-self.airpts/5)) 
+        # how quickly people recover with no aid
+        gamma = (1 - math.exp(-self.gdp/10000)) 
         new_inf = int(delta*math.exp(-amount*alpha)*self.susc)
         new_recov = int(gamma*(1 - math.exp(-amount*beta))*self.inf)
         self.susc -= new_inf
@@ -189,7 +193,9 @@ def CREATE_INITIAL_STATE():
                 lifeExp = float(c[7])
                 gdp = int(c[11])
                 airpts = int(c[12])
-                cities.append(City(name, lat, lng, pop, medAge, lifeExp, gdp, airpts))
+                size = int(c[13])
+                cities.append(City(name, lat, lng, pop, medAge, lifeExp, gdp,
+                    airpts, size))
     return State(cities)
 INITIAL_STATE = CREATE_INITIAL_STATE()
 #</INITIAL_STATE>
@@ -197,11 +203,18 @@ INITIAL_STATE = CREATE_INITIAL_STATE()
 #<OPERATORS>
 def updateCity(s, city, aid):
     newS = s.__copy__()
-    for n, c in newS.cities.items():
+    for n1, c1 in newS.cities.items():
+        for n2, c2 in newS.cities.items():
+            if n1 != n2:
+                dist = math.sqrt((c1.lat-c2.lat)**2 + (c1.lng-c2.lng)**2)
+                air = c1.airpts * c2.airpts
+                c1.gamma = c1.pop * air / dist
+                c2.gamma = c2.pop * air / dist
         if n == city:
             c.giveAid(1)
         else:
             c.giveAid(0)
+        print(str(n1) + str(c1.gamma))
     return newS
 
 OPERATORS = [Operator("Gave aid to " + name,
