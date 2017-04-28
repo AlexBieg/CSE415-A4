@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9936c92d-9366-4094-a5c1-5a6a0e61e1d9" name="Default" comment="" />
+    <list default="true" id="9936c92d-9366-4094-a5c1-5a6a0e61e1d9" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Diseases.py" afterPath="$PROJECT_DIR$/Diseases.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/who_and_what.py" afterPath="$PROJECT_DIR$/who_and_what.py" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,11 +15,31 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="who_and_what.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="who_and_what.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/who_and_what.py">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret line="89" column="47" lean-forward="false" selection-start-line="89" selection-start-column="47" selection-end-line="89" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Diseases.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Diseases.py">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="651">
-              <caret line="104" column="30" lean-forward="false" selection-start-line="104" selection-start-column="30" selection-end-line="104" selection-end-column="30" />
+              <caret line="111" column="22" lean-forward="false" selection-start-line="111" selection-start-column="22" selection-end-line="111" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cities.tsv" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/cities.tsv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -31,6 +54,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/who_and_what.py" />
+        <option value="$PROJECT_DIR$/Diseases.py" />
+        <option value="$PROJECT_DIR$/cities.tsv" />
       </list>
     </option>
   </component>
@@ -136,8 +161,24 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/who_and_what.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="89" column="47" lean-forward="false" selection-start-line="89" selection-start-column="47" selection-end-line="89" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Diseases.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="651">
-          <caret line="104" column="30" lean-forward="false" selection-start-line="104" selection-start-column="30" selection-end-line="104" selection-end-column="30" />
+          <caret line="111" column="22" lean-forward="false" selection-start-line="111" selection-start-column="22" selection-end-line="111" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cities.tsv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>

@@ -91,7 +91,7 @@ cole = Partner("Cole", "Chamberlin", "jessec18")
 team = [alex, cole]
 
 #TODO: Update this
-problem1 = Problem("<CHANGE TO OUR SPECIFIC PROBLEM>", 'wicked', "Stop_Zika")
+problem1 = Problem("Stop disease spread between major african cities", 'wicked', "Diseases")
  # In this case, the Python file for the formulation would be named End_Poverty.py.
 
 problems = [problem1]
