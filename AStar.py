@@ -27,7 +27,7 @@ if sys.argv==[''] or len(sys.argv)<2:
 else:
     import importlib
     Problem = importlib.import_module(sys.argv[1])
-    heuristics = lambda s: Problem.HEURISTICS[sys.argv[2]](s)
+    heuristics = lambda s: Problem.HEURISTICS[0](s)
 
 # import initial state from file
 try:
