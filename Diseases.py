@@ -108,7 +108,7 @@ class State():
     def getCity(self, city):
         return self.cities[city]
 
-    def getScore():
+    def getScore(self):
         score = 0
         for c in self.cities:
             score += c.score()
