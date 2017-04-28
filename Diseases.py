@@ -222,5 +222,5 @@ GOAL_MESSAGE_FUNCTION = lambda s: goal_message(s)
 #</GOAL_MESSAGE_FUNCTION>
 
 #<HEURISTICS> (optional)
-HEURISTICS = {'h_state': h_state}
+HEURISTICS = [h_state]
 #</HEURISTICS>
