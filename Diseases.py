@@ -197,17 +197,11 @@ INITIAL_STATE = CREATE_INITIAL_STATE()
 #<OPERATORS>
 def updateCity(s, city, aid):
     newS = s.__copy__()
-<<<<<<< HEAD
     for n, c in newS.cities.items():
         if n == city:
             c.giveAid(1)
         else:
             c.giveAid(0)
-=======
-    newS.getCity(city).giveAid(aid)
-
-    # TODO: spread disease in state
->>>>>>> 267c3f95327db4d21fa06edd3391d8b39be03ba0
     return newS
 
 OPERATORS = [Operator("Gave aid to " + name,
