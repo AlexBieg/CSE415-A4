@@ -40,10 +40,16 @@ class Operator:
         return self.state_transf(s)
 
 
+def h_state(s):
+    sum = 0
+    for city in s.cities:
+       sum += city.score()
+
+    return sum
+
 #</COMMON_CODE>
 
 #<COMMON_DATA>
-N_tiles = 8
 
 #</COMMON_DATA>
 
@@ -130,6 +136,9 @@ class City():
         self.inf -= new_rec
         self.rec += new_rec
 
+    def needsAid(self):
+        return self.inf > 0
+
     def score(self):
         return self.pop - self.inf
 #</CITY>
@@ -180,6 +189,5 @@ GOAL_MESSAGE_FUNCTION = lambda s: goal_message(s)
 #</GOAL_MESSAGE_FUNCTION>
 
 #<HEURISTICS> (optional)
-HEURISTICS = {'h_euclidean': h_euclidean, 'h_hamming': h_hamming, 
-        'h_manhattan': h_manhattan, 'h_custom': h_custom}
+HEURISTICS = {'h_state': h_state}
 #</HEURISTICS>
