@@ -1,5 +1,5 @@
 '''
-Cole Chamberlin 1434297 jessec18
+Cole Chamberlin 1434297 jessec18, Alex Bieg 1337896 biega
 CSE 415, University of Washington
 Steven Tanimoto
 HW4 Problem Formulation
@@ -189,6 +189,8 @@ INITIAL_STATE = CREATE_INITIAL_STATE()
 def updateCity(s, city, aid):
     newS = s.__copy__()
     newS.getCity(city).giveAid(aid)
+
+    # TODO: spread disease in state
     return newS
 
 OPERATORS = [Operator("Gave aid to " + name,
