@@ -21,8 +21,8 @@ from queue import PriorityQueue
 
 # DO NOT CHANGE THIS SECTION 
 if sys.argv==[''] or len(sys.argv)<2:
-    import EightPuzzleWithHeuristics as Problem
-    heuristics = lambda s: Problem.HEURISTICS['h_manhattan'](s)
+    import Diseases as Problem
+    heuristics = lambda s: Problem.HEURISTICS['h_state'](s)
     
 else:
     import importlib
@@ -49,9 +49,10 @@ def runAStar():
     global COUNT, BACKLINKS
     COUNT = 0
     BACKLINKS = {}
-    path, name = AStar(initial_state)
+    #path, name = AStar(initial_state)
+    AStar(initial_state)
     print(str(COUNT)+" states examined.")
-    return path, name
+    return None, None
 
 # A star search algorithm
 def AStar(initial_state):
@@ -83,7 +84,6 @@ def AStar(initial_state):
                 if new_state not in CLOSED:
                     if new_state not in OPEN_D or \
                             OPEN_D[new_state] > new_state.cost:
-                        new_state.heur = heuristics(new_state)
                         OPEN.put(new_state)
                         OPEN_D[new_state] = new_state.cost
                         BACKLINKS[new_state] = S

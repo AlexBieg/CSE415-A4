@@ -50,48 +50,62 @@ def h_state(s):
 #</COMMON_CODE>
 
 #<COMMON_DATA>
-
+cities = []
 #</COMMON_DATA>
 
 
 #<STATE>
 class State():
-    def __init__(self, cities, aid):
+    def __init__(self, cities):
         self.cities = cities
-        self.aid = aid
 
     def __repr__(self):
         return self.__str__()
 
     def __str__(self):
         # Produces a brief textual description of a state.
-        txt = ''
-        for x in range(self.size):
-            for y in range(self.size):
-                val = self.config[self.size * x + y]
-                txt += ' ' + (str(val) if val != 0 else ' ')
-            txt += '\n'
+        total_population = 0
+        total_infected = 0
+        txt = "City\t\tPopulation\t% Infected\n"
+        for city in self.cities:
+            name = city.name + ("\t" if len(city.name) < 8 else "")
+            pop = int(city.pop)
+            inf = int(city.inf)
+            total_population += pop
+            total_infected += pop
+            txt += name + "\t" + "{:,}".format(pop * 1000) + "\t" + str(inf/pop) + "\n" 
+        txt += "\n" + "Total % Infected: " + str(total_population/total_infected)
         return txt
 
     def __eq__(self, other):
         if isinstance(other, State):
-            return self.config == other.config
+            return self.name == other.name
 
     def __lt__(self, other):
         if isinstance(other, State):
-            return (self.cost + self.heur) < (other.cost + other.heur)
+            return (self.getScore()) < (other.getScore())
 
     def __hash__(self):
-        return str(self.config).__hash__()
+        h = ""
+        for c in self.cities:
+            h += str(c.inf)
+        return h.__hash__()
 
     def __copy__(self):
         # Performs an appropriately deep copy of a state,
         # for use by operators in creating new states.
-        newS = State(list(self.config), self.cost, self.heur)
+        newS = State(list(cities))
         return newS
 
     def getCity(self, city):
-        return self.cities[city]
+        return self.cities[self.cities.index(city)]
+
+    def getScore():
+        score = 0
+        for c in self.cities:
+            score += c.score()
+        return score
+
 #</STATE>
 
 #<CITY>
@@ -144,7 +158,6 @@ class City():
 #</CITY>
 
 #<INITIAL_STATE>
-INITIAL_STATE = None
 def CREATE_INITIAL_STATE():
     cities = []
     with open("cities.tsv", 'r') as city_data:
@@ -160,9 +173,8 @@ def CREATE_INITIAL_STATE():
                 gdp = c[10]
                 airpts = c[11]
                 cities.append(City(name, lat, lng, pop, medAge, lifeExp, gdp, airpts))
-    s = State(cities, 
-
-
+    return State(cities)
+INITIAL_STATE = CREATE_INITIAL_STATE()
 #</INITIAL_STATE>
 
 #<OPERATORS>
@@ -171,13 +183,13 @@ def updateCity(s, city, aid):
     newS.getCity(city).giveAid(aid)
     return newS
 
-OPERATORS = [Operator("Give aid to city " + city.name,
+OPERATORS = [Operator("Gave aid to " + city.name,
     # The default value construct is needed
     # here to capture the values of p&q separately
     # in each iteration of the list comp. iteration.
     lambda s,c1=city: s.getCity(c1).needsAid(),
     lambda s,c1=city: updateCity(s, c1, 1))
-    for city in cities]
+    for city in INITIAL_STATE.cities]
 #</OPERATORS>
 
 #<GOAL_TEST>
