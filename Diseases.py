@@ -57,7 +57,9 @@ cities = []
 #<STATE>
 class State():
     def __init__(self, cities):
-        self.cities = cities
+        self.cities = {}
+        for city in cities:
+            self.cities[city.name] = city
 
     def __repr__(self):
         return self.__str__()
@@ -67,19 +69,22 @@ class State():
         total_population = 0
         total_infected = 0
         txt = "City\t\tPopulation\t% Infected\n"
-        for city in self.cities:
-            name = city.name + ("\t" if len(city.name) < 8 else "")
+        for name, city in self.cities.items():
+            name = name + ("\t" if len(name) < 8 else "")
             pop = int(city.pop)
             inf = int(city.inf)
             total_population += pop
-            total_infected += pop
+            total_infected += inf
             txt += name + "\t" + "{:,}".format(pop * 1000) + "\t" + str(inf/pop) + "\n" 
-        txt += "\n" + "Total % Infected: " + str(total_population/total_infected)
+        txt += "\n" + "Total % Infected: " + str(total_infected/total_population)
         return txt
 
     def __eq__(self, other):
         if isinstance(other, State):
-            return self.name == other.name
+            if len(self.cities) != len(other.cities): return False
+            for name, city in self.cities.items():
+                if not other.cities[name].__eq__(city): return False
+            return True
 
     def __lt__(self, other):
         if isinstance(other, State):
@@ -87,18 +92,21 @@ class State():
 
     def __hash__(self):
         h = ""
-        for c in self.cities:
+        for n, c in self.cities.items():
             h += str(c.inf)
         return h.__hash__()
 
     def __copy__(self):
         # Performs an appropriately deep copy of a state,
         # for use by operators in creating new states.
-        newS = State(list(cities))
+        newCities = []
+        for name, city in self.cities.items():
+            newCities.append(city.__copy__())
+        newS = State(newCities)
         return newS
 
     def getCity(self, city):
-        return self.cities[self.cities.index(city)]
+        return self.cities[city]
 
     def getScore():
         score = 0
@@ -120,8 +128,8 @@ class City():
         self.lifeExp = lifeExp
         self.gdp = gdp
         self.airpts = airpts
-        self.susc = susc
-        self.inf = inf
+        self.susc = float(pop) * 0.7
+        self.inf = float(pop) * 0.3
         self.recov = recov
         self.ds = ds
         self.di = di
@@ -136,7 +144,7 @@ class City():
 
     def __copy__(self):
         newCity = City(self.name, self.lat, self.lng, self.pop, self.medAge,
-                self.lifeExp, self.gdp, self.airpts, self.infected, self.susc,
+                self.lifeExp, self.gdp, self.airpts, self.inf, self.susc,
                 self.recov)
         return newCity
 
@@ -144,11 +152,11 @@ class City():
         alpha = 1
         beta = 1
         new_inf = math.exp(-amount*alpha) * self.susc
-        new_rec = (1 - math.exp(-amount*beta)) * self.inf
+        new_recov = (1 - math.exp(-amount*beta)) * self.inf
         self.susc -= new_inf
         self.inf += new_inf
-        self.inf -= new_rec
-        self.rec += new_rec
+        self.inf -= new_recov
+        self.recov += new_recov
 
     def needsAid(self):
         return self.inf > 0
@@ -183,13 +191,13 @@ def updateCity(s, city, aid):
     newS.getCity(city).giveAid(aid)
     return newS
 
-OPERATORS = [Operator("Gave aid to " + city.name,
+OPERATORS = [Operator("Gave aid to " + name,
     # The default value construct is needed
     # here to capture the values of p&q separately
     # in each iteration of the list comp. iteration.
-    lambda s,c1=city: s.getCity(c1).needsAid(),
-    lambda s,c1=city: updateCity(s, c1, 1))
-    for city in INITIAL_STATE.cities]
+    lambda s,n=name: s.getCity(n).needsAid(),
+    lambda s,n=name: updateCity(s, n, 1))
+    for name in INITIAL_STATE.cities]
 #</OPERATORS>
 
 #<GOAL_TEST>

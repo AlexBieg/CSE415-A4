@@ -80,6 +80,7 @@ def AStar(initial_state):
         COUNT += 1
         for op in Problem.OPERATORS:
             if op.precond(S):
+                print(op.name)
                 new_state = op.state_transf(S)
                 if new_state not in CLOSED:
                     if new_state not in OPEN_D or \
