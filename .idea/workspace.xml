@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9936c92d-9366-4094-a5c1-5a6a0e61e1d9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Diseases.py" afterPath="$PROJECT_DIR$/Diseases.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/who_and_what.py" afterPath="$PROJECT_DIR$/who_and_what.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,17 +24,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Diseases.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Diseases.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Diseases.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="651">
-              <caret line="111" column="22" lean-forward="false" selection-start-line="111" selection-start-column="22" selection-end-line="111" selection-end-column="22" />
+            <state relative-caret-position="0">
+              <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cities.tsv" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AStar.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AStar.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="29" column="60" lean-forward="false" selection-start-line="29" selection-start-column="60" selection-end-line="29" selection-end-column="60" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cities.tsv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cities.tsv">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
@@ -54,8 +63,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/who_and_what.py" />
-        <option value="$PROJECT_DIR$/Diseases.py" />
         <option value="$PROJECT_DIR$/cities.tsv" />
+        <option value="$PROJECT_DIR$/Diseases.py" />
       </list>
     </option>
   </component>
@@ -159,6 +168,22 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/cities.tsv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AStar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="29" column="60" lean-forward="false" selection-start-line="29" selection-start-column="60" selection-end-line="29" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/who_and_what.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
@@ -169,16 +194,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Diseases.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="651">
-          <caret line="111" column="22" lean-forward="false" selection-start-line="111" selection-start-column="22" selection-end-line="111" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cities.tsv">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding />
         </state>
       </provider>
