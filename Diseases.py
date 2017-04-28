@@ -50,10 +50,9 @@ N_tiles = 8
 
 #<STATE>
 class State():
-    def __init__(self, cities, aid, heur):
+    def __init__(self, cities, aid):
         self.cities = cities
         self.aid = aid
-        self.heur = heur
 
     def __repr__(self):
         return self.__str__()
@@ -91,12 +90,15 @@ class State():
 
 #<CITY>
 class City():
-    def __init__(self, name, lat, lng, pop, airpts, inf=0.0, susc=0.0,
+    def __init__(self, name, lat, lng, pop, medAge, lifeExp, gdp, airpts, inf=0.0, susc=0.0,
             recov=0.0, ds=0.0, di=0.0, dr=0.0):
         self.name = name
         self.lat = lat
         self.lng = lng
         self.pop = pop
+        self.medAge = medAge
+        self.lifeExp = lifeExp
+        self.gdp = gdp
         self.airpts = airpts
         self.susc = susc
         self.inf = inf
@@ -113,8 +115,9 @@ class City():
         (self.name + str(self.lat) + str(self.lng)).__hash__()
 
     def __copy__(self):
-        newCity = City(self.name, self.lat, self.lng, self.pop, self.airpts,
-                self.infected, self.susc, self.recov)
+        newCity = City(self.name, self.lat, self.lng, self.pop, self.medAge,
+                self.lifeExp, self.gdp, self.airpts, self.infected, self.susc,
+                self.recov)
         return newCity
 
     def giveAid(self, amount):
@@ -134,11 +137,22 @@ class City():
 #<INITIAL_STATE>
 INITIAL_STATE = None
 def CREATE_INITIAL_STATE():
-    with open("cities.tsv", 'r') as cities:
-        for i, line in enumerate(cities):
+    cities = []
+    with open("cities.tsv", 'r') as city_data:
+        for i, line in enumerate(city_data):
             if i != 0:
                 c = line.split('\t')
                 name = c[0]
+                lat = c[2]
+                lng = c[3]
+                pop = c[5]
+                medAge = c[6]
+                lifeExp = c[7]
+                gdp = c[10]
+                airpts = c[11]
+                cities.append(City(name, lat, lng, pop, medAge, lifeExp, gdp, airpts))
+    s = State(cities, 
+
 
 #</INITIAL_STATE>
 
