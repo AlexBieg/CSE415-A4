@@ -204,7 +204,13 @@ class City():
 
 #<INITIAL_STATE>
 INITIAL_STATE = None
-CREATE_INITIAL_STATE = lambda: INITIAL_STATE
+def CREATE_INITIAL_STATE():
+    with open("cities.tsv", 'r') as cities:
+        for i, line in enumerate(cities):
+            if i != 0:
+                c = line.split('\t')
+                name = c[0]
+
 #</INITIAL_STATE>
 
 #<OPERATORS>
