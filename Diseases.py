@@ -77,7 +77,7 @@ class State():
             inf = int(city.inf)
             total_population += pop
             total_infected += inf
-            txt += name+"\t"+"{:,}".format(pop*1000)+"\t"+str(int(inf))+"\n" 
+            txt += name+"\t"+"{:,}".format(pop*1000)+"\t"+str(int(100 * inf / city.pop))+"\n"
         txt += "\n"+"Total % Infected: "+str(int(100*total_infected/total_population))
         return txt
 
@@ -184,8 +184,8 @@ class City():
         self.repro = 0.2
         x1 = max(0, self.alpha-self.delta)
         x2 = max(0, self.beta+self.gamma)
-        print(x1)
-        print(x2)
+        #print(x1)
+        #print(x2)
         #print(self.name)
         new_inf = int(self.repro*math.exp(-x1)*self.susc)
         #print("new_inf: " + str(new_inf/self.pop))

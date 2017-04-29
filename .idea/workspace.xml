@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9936c92d-9366-4094-a5c1-5a6a0e61e1d9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AStar.py" afterPath="$PROJECT_DIR$/AStar.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Diseases.py" afterPath="$PROJECT_DIR$/Diseases.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Our-Wicked-Problem.tex" afterPath="$PROJECT_DIR$/Our-Wicked-Problem.tex" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,8 +19,8 @@
       <file leaf-file-name="Diseases.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Diseases.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="210" column="14" lean-forward="false" selection-start-line="210" selection-start-column="14" selection-end-line="210" selection-end-column="14" />
+            <state relative-caret-position="483">
+              <caret line="80" column="8" lean-forward="false" selection-start-line="80" selection-start-column="8" selection-end-line="80" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -29,19 +29,9 @@
       <file leaf-file-name="AStar.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AStar.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
-              <caret line="29" column="46" lean-forward="true" selection-start-line="29" selection-start-column="46" selection-end-line="29" selection-end-column="46" />
-              <folding>
-                <marker date="1493432473314" expanded="true" signature="1469:2561" ph="..." />
-                <marker date="1493432473314" expanded="true" signature="1681:2561" ph="..." />
-                <marker date="1493432473314" expanded="true" signature="1865:1995" ph="..." />
-                <marker date="1493432473314" expanded="true" signature="2094:2561" ph="..." />
-                <marker date="1493432473314" expanded="true" signature="2124:2561" ph="..." />
-                <marker date="1493432473314" expanded="true" signature="2246:2561" ph="..." />
-                <marker date="1493432473314" expanded="true" signature="2294:2561" ph="..." />
-                <marker date="1493432473314" expanded="true" signature="2596:2848" ph="..." />
-                <marker date="1493432473314" expanded="true" signature="2654:2702" ph="..." />
-              </folding>
+            <state relative-caret-position="504">
+              <caret line="73" column="21" lean-forward="false" selection-start-line="73" selection-start-column="21" selection-end-line="73" selection-end-column="21" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -75,9 +65,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/a4_simple_autograder.py" />
-        <option value="$PROJECT_DIR$/AStar.py" />
         <option value="$PROJECT_DIR$/who_and_what.py" />
         <option value="$PROJECT_DIR$/Our-Wicked-Problem.tex" />
+        <option value="$PROJECT_DIR$/AStar.py" />
         <option value="$PROJECT_DIR$/Diseases.py" />
       </list>
     </option>
@@ -276,17 +266,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1281">
           <caret line="62" column="29" lean-forward="false" selection-start-line="62" selection-start-column="29" selection-end-line="62" selection-end-column="29" />
-          <folding>
-            <marker date="1493432473314" expanded="true" signature="1469:2561" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="1681:2561" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="1865:1995" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="2094:2561" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="2124:2561" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="2246:2561" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="2294:2561" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="2596:2848" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="2654:2702" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -310,17 +290,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="29" column="60" lean-forward="false" selection-start-line="29" selection-start-column="60" selection-end-line="29" selection-end-column="60" />
-          <folding>
-            <marker date="1493432473314" expanded="true" signature="1469:2561" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="1681:2561" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="1865:1995" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="2094:2561" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="2124:2561" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="2246:2561" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="2294:2561" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="2596:2848" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="2654:2702" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -372,24 +342,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AStar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="29" column="46" lean-forward="true" selection-start-line="29" selection-start-column="46" selection-end-line="29" selection-end-column="46" />
-          <folding>
-            <marker date="1493432473314" expanded="true" signature="1469:2561" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="1681:2561" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="1865:1995" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="2094:2561" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="2124:2561" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="2246:2561" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="2294:2561" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="2596:2848" ph="..." />
-            <marker date="1493432473314" expanded="true" signature="2654:2702" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Our-Wicked-Problem.tex">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -398,10 +350,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/AStar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="73" column="21" lean-forward="false" selection-start-line="73" selection-start-column="21" selection-end-line="73" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Diseases.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="210" column="14" lean-forward="false" selection-start-line="210" selection-start-column="14" selection-end-line="210" selection-end-column="14" />
+        <state relative-caret-position="483">
+          <caret line="80" column="8" lean-forward="false" selection-start-line="80" selection-start-column="8" selection-end-line="80" selection-end-column="8" />
           <folding />
         </state>
       </provider>
