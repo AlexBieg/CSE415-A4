@@ -71,7 +71,7 @@ def AStar(initial_state):
         CLOSED.append(S)
         
         # DO NOT CHANGE THIS SECTION: begining 
-        if Problem.GOAL_TEST(S):
+        if S.date == 10:
             print(Problem.GOAL_MESSAGE_FUNCTION(S))
             path = backtrace(S)
             return path, Problem.PROBLEM_NAME

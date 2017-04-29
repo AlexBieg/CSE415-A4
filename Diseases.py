@@ -25,7 +25,7 @@ def goal_test(s):
     return False
 
 def goal_message(s):
-    return "The puzzle is solved!"
+    return "Malaria is erradicated"
 
 class Operator:
     def __init__(self, name, precond, state_transf):
@@ -42,10 +42,10 @@ class Operator:
 
 def h_state(s):
     sum = 0
-    for city in s.cities:
-       sum += city.score()
+    for n, c in s.cities.items():
+       sum += c.score()
 
-    return sum
+    return sum + s.cost
 
 #</COMMON_CODE>
 
@@ -56,10 +56,11 @@ cities = []
 
 #<STATE>
 class State():
-    def __init__(self, cities, date=0):
+    def __init__(self, cities, date=0, cost=0):
         self.cities = {}
         self.cities = cities
         self.date = date
+        self.cost = cost
 
     def __repr__(self):
         return self.__str__()
@@ -68,14 +69,15 @@ class State():
         # Produces a brief textual description of a state.
         total_population = 0
         total_infected = 0
-        txt = "City\t\tPopulation\t% Infected\n"
+        txt = "Date: " + str(self.date) + "\n"
+        txt += "City\t\tPopulation\t% Infected\n"
         for name, city in self.cities.items():
             name = name + ("\t" if len(name) < 8 else "")
             pop = int(city.pop)
             inf = int(city.inf)
             total_population += pop
             total_infected += inf
-            txt += name+"\t"+"{:,}".format(pop * 1000)+"\t"+str(int(100*inf/pop))+"\n" 
+            txt += name+"\t"+"{:,}".format(pop*1000)+"\t"+str(int(inf))+"\n" 
         txt += "\n"+"Total % Infected: "+str(int(100*total_infected/total_population))
         return txt
 
@@ -91,7 +93,7 @@ class State():
 
     def __lt__(self, other):
         if isinstance(other, State):
-            return (self.getScore()) < (other.getScore())
+            return (h_state(self)) < (h_state(other))
 
     def __hash__(self):
         h = ""
@@ -134,8 +136,8 @@ class City():
         self.gdp = gdp
         self.airpts = airpts
         self.size = size
-        self.susc = float(pop) * 0.7
-        self.inf = float(pop) * 0.3
+        self.susc = float(pop) * 0.5
+        self.inf = float(pop) * 0.5
         self.recov = recov
         self.alpha = alpha
         self.beta = beta
@@ -166,19 +168,31 @@ class City():
         return newCity
 
     def giveAid(self, amount):
-        amt_per_person = amount / (self.pop - self.recov)
+        try:
+            amt_per_person = 10000 * amount / (self.pop - self.recov)
+        except(ZeroDivisionError):
+            amt_per_person = 0
         # how much effect the aid has on stopping new infections
         self.alpha = self.susc * amt_per_person 
         # how much effect the aid has on curing infected people
         self.beta = self.inf * amt_per_person 
-        # how quickly infection spreads with no aid
-        self.delta = (1 - math.exp(-self.airpts/5)) 
-        # gamma: how quickly people recover with no aid
+        # delta: how quickly infection spreads with no aid
         # gets set outside of city since it references other cities
-        new_inf = int(self.delta*math.exp(-amount*self.alpha)*self.susc)
-        new_recov = int(self.gamma*(1 - math.exp(-amount*self.beta))*self.inf)
+        # gamma: how quickly people recover with no aid
+        self.gamma = self.gdp / (self.medAge * 1000)
+        # repro: how quickly the disease reproduces
+        self.repro = 0.2
+        x1 = max(0, self.alpha-self.delta)
+        x2 = max(0, self.beta+self.gamma)
+        print(x1)
+        print(x2)
+        #print(self.name)
+        new_inf = int(self.repro*math.exp(-x1)*self.susc)
+        #print("new_inf: " + str(new_inf/self.pop))
         self.susc -= new_inf
         self.inf += new_inf
+        new_recov = int((1 - math.exp(-x2))*self.inf)
+        #print("new_recov: " + str(new_recov/self.pop))
         self.inf -= new_recov
         self.recov += new_recov
 
@@ -187,7 +201,7 @@ class City():
             if self != c:
                 dist = math.sqrt((self.lat-c.lat)**2 + (self.lng-c.lng)**2)
                 air = self.airpts * c.airpts
-                self.gamma = c.inf * air / (dist * 1000)
+                self.delta = c.inf * air / (dist * 10000)
          
 
     def needsAid(self):
@@ -223,6 +237,7 @@ INITIAL_STATE = CREATE_INITIAL_STATE()
 #<OPERATORS>
 def updateCity(s, city, aid):
     newS = s.__copy__()
+    newS.cost += aid
     for n, c in newS.cities.items():
         c.calcDist(newS)
         if n == city:
