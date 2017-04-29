@@ -25,11 +25,16 @@ The problem is modeled as a chronological progression. Each state exists at a
 specific time offset from the initial state, and each transition respresents a
 constant time increment between starting and ending states. The operators on
 each state represent a distribution of aid to specific cities via a third party.
+
+
 \section*{The Model}
 There are several attributes of each state that dictate how the operator
 transforms it. Within a state, each city has a population partitioned into
 susceptible, infected, and recovered. This is based on common epidemiology
-models that use these three quantities to characterize a population. 
+models that use these three quantities to characterize a population.
+
+There are many features of a city and it's surrounding cities that can affect these
+attributes.
 
 \section*{Previous work}
 

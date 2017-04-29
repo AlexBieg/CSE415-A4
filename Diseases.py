@@ -42,10 +42,10 @@ class Operator:
 
 def h_state(s):
     sum = 0
-    for city in s.cities:
-       sum += city.score()
+    for n, c in s.cities.items():
+       sum += c.score()
 
-    return sum
+    return sum + s.cost
 
 #</COMMON_CODE>
 
@@ -56,10 +56,11 @@ cities = []
 
 #<STATE>
 class State():
-    def __init__(self, cities, date=0):
+    def __init__(self, cities, date=0, cost=0):
         self.cities = {}
         self.cities = cities
         self.date = date
+        self.cost = cost
 
     def __repr__(self):
         return self.__str__()
@@ -68,7 +69,8 @@ class State():
         # Produces a brief textual description of a state.
         total_population = 0
         total_infected = 0
-        txt = "City\t\tPopulation\t% Infected\n"
+        txt = "Date: " + str(self.date) + "\n"
+        txt += "City\t\tPopulation\t% Infected\n"
         for name, city in self.cities.items():
             name = name + ("\t" if len(name) < 8 else "")
             pop = int(city.pop)
@@ -91,7 +93,7 @@ class State():
 
     def __lt__(self, other):
         if isinstance(other, State):
-            return (self.getScore()) < (other.getScore())
+            return (h_state(self)) < (h_state(other))
 
     def __hash__(self):
         h = ""
@@ -215,6 +217,7 @@ INITIAL_STATE = CREATE_INITIAL_STATE()
 #<OPERATORS>
 def updateCity(s, city, aid):
     newS = s.__copy__()
+    newS.cost += aid
     for n1, c1 in newS.cities.items():
         for n2, c2 in newS.cities.items():
             if n1 != n2:
@@ -226,7 +229,7 @@ def updateCity(s, city, aid):
             c1.giveAid(1)
         else:
             c1.giveAid(0)
-        print(str(n1) + str(c1.gamma))
+        #print(str(n1) + str(c1.gamma))
     return newS
 
 OPERATORS = [Operator("Gave aid to " + name,
