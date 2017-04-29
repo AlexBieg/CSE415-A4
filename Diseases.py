@@ -208,7 +208,7 @@ class City():
         return self.inf > 0
 
     def score(self):
-        return self.pop - self.inf
+        return self.inf
 #</CITY>
 
 #<INITIAL_STATE>

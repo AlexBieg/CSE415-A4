@@ -26,6 +26,13 @@ specific time offset from the initial state, and each transition respresents a
 constant time increment between starting and ending states. The operators on
 each state represent a distribution of aid to specific cities via a third party.
 
+In our problem formulation we are looking at the 15 largest cities in Africa.
+Aid can only ever be distributed to a single city per operator. This means
+that we have a branching factor of 15.
+
+One might naiively believe that we should set the goal state to a world where the
+disease no longer exists. Unfortunately, Given the nature of most diseases, complete eradication
+is not an option. Because of this, we are not including a goal state.
 
 \section*{The Model}
 There are several attributes of each state that dictate how the operator
@@ -33,13 +40,33 @@ transforms it. Within a state, each city has a population partitioned into
 susceptible, infected, and recovered. This is based on common epidemiology
 models that use these three quantities to characterize a population.
 
-There are many features of a city and it's surrounding cities that can affect these
+When aid is applied to a city the rate at which susceptable become infected
+will decrease and the rate that infected become recovered will increase. In
+addition to the aid applied to a city, it's other features will affect the
 attributes.
 
+Citites that are connected to a city can also spread infections between them.
+This is affected by the euclidean distance between the cities, the total population
+of the two cities and number of airports that each city has.
+
 \section*{Previous work}
+We did not create our model in a vacuum and as such it is important to recognize
+previous work that came before us. The Mathematical Association of America has
+developed a differential model of disease that we adapted for our model. It specifically
+denotes the three populations (susceptable, infected, and recovered) that we used. It
+also provided the "Infection Equation" which allowed us to effectively model the population, and integrations with the
+autograder. of a city.
 
 \section*{Results}
 In this section we describe the results.
+
+\section*{Retrospective}
+Cole's contributions include, but are not limited to: creating most of the starter code,
+the infection spreading algorithm, and developing the city class.
+
+Alex's contributions include, but are not limited to: writing the PDF, the state class
+development, hashing and equals functions for the classes, and integrations with the
+autograder.
 
 \section*{Conclusions}
 We worked hard, and achieved very little.
