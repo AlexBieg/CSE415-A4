@@ -114,6 +114,7 @@ class State():
     def getCity(self, city):
         return self.cities[city]
 
+    # compute the total number of infected individuals in the country
     def getScore(self):
         score = 0
         for n, c in self.cities.items():
@@ -126,7 +127,7 @@ class State():
 class City():
 
     def __init__(self, name, lat, lng, pop, medAge, lifeExp, gdp, airpts, size,
-            inf=0.0, susc=0.0, recov=0.0, alpha=0.0, beta=0.0, delta=0.0, gamma=0.0):
+            inf=0.0, susc=0.0, recov=0.0):
         self.name = name
         self.lat = lat
         self.lng = lng
@@ -139,10 +140,6 @@ class City():
         self.susc = float(pop) * 0.5
         self.inf = float(pop) * 0.5
         self.recov = recov
-        self.alpha = alpha
-        self.beta = beta
-        self.delta = delta
-        self.gamma = gamma
 
     def __eq__(self, other):
         is_same = False
@@ -167,6 +164,7 @@ class City():
                 self.susc, self.recov)
         return newCity
 
+    # update the infection rates of a city based on the amount of aid given
     def giveAid(self, amount):
         try:
             amt_per_person = 10000 * amount / (self.pop - self.recov)
@@ -182,31 +180,32 @@ class City():
         self.gamma = self.gdp / (self.medAge * 1000)
         # repro: how quickly the disease reproduces
         self.repro = 0.2
-        x1 = max(0, self.alpha-self.delta)
-        x2 = max(0, self.beta+self.gamma)
-        #print(x1)
-        #print(x2)
-        #print(self.name)
-        new_inf = int(self.repro*math.exp(-x1)*self.susc)
-        #print("new_inf: " + str(new_inf/self.pop))
+        new_inf = int(self.repro*math.exp(-max(0, self.alpha-self.delta))*self.susc)
+        # update susceptible and infected populations
         self.susc -= new_inf
         self.inf += new_inf
-        new_recov = int((1 - math.exp(-x2))*self.inf)
-        #print("new_recov: " + str(new_recov/self.pop))
+        new_recov = int((1 - math.exp(-max(0, self.beta+self.gamma)))*self.inf)
+        # update susceptible and infected populations
         self.inf -= new_recov
         self.recov += new_recov
 
+    # computes distance between each pair of cities, total number of airports
+    # and creates a delta value for the model
     def calcDist(self, s):
         for n, c in s.cities.items():
             if self != c:
                 dist = math.sqrt((self.lat-c.lat)**2 + (self.lng-c.lng)**2)
                 air = self.airpts * c.airpts
+                # delta directly proportional to number of infected people,
+                # product of number of airports and inversely proportional to
+                # the distance between the cities
                 self.delta = c.inf * air / (dist * 10000)
          
-
+    # precondition for operator
     def needsAid(self):
         return self.inf > 0
 
+    # score of city is based on total number of infectd people
     def score(self):
         return self.inf
 #</CITY>
@@ -216,6 +215,7 @@ def CREATE_INITIAL_STATE():
     cities = {}
     with open("cities.tsv", 'r') as city_data:
         for i, line in enumerate(city_data):
+            # read from tsv
             if i != 0:
                 c = line.split('\t')
                 name = c[0]
@@ -237,9 +237,12 @@ INITIAL_STATE = CREATE_INITIAL_STATE()
 #<OPERATORS>
 def updateCity(s, city, aid):
     newS = s.__copy__()
+    # increment aid distributed
     newS.cost += aid
     for n, c in newS.cities.items():
+        # compute the distances between each pair of cities
         c.calcDist(newS)
+        # give aid to one city
         if n == city:
             c.giveAid(1)
         else:
@@ -247,9 +250,6 @@ def updateCity(s, city, aid):
     return newS
 
 OPERATORS = [Operator("Gave aid to " + name,
-    # The default value construct is needed
-    # here to capture the values of p&q separately
-    # in each iteration of the list comp. iteration.
     lambda s,n=name: s.getCity(n).needsAid(),
     lambda s,n=name: updateCity(s, n, 1))
     for name in INITIAL_STATE.cities]
